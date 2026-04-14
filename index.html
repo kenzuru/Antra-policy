@@ -1,265 +1,378 @@
-const {
-  Document, Packer, Paragraph, TextRun, AlignmentType,
-  HeadingLevel, LevelFormat, BorderStyle, UnderlineType
-} = require('docx');
-const fs = require('fs');
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>سياسة الخصوصية - Antra</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #1A3C6E;
+      --accent: #2E5FA3;
+      --light-accent: #E8F0FB;
+      --text: #1a1a2e;
+      --muted: #666680;
+      --border: #d0d8e8;
+      --bg: #f7f9fd;
+      --white: #ffffff;
+      --bullet: #2E5FA3;
+    }
 
-const rtl = true;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-function heading1(text) {
-  return new Paragraph({
-    heading: HeadingLevel.HEADING_1,
-    bidirectional: rtl,
-    alignment: AlignmentType.RIGHT,
-    spacing: { before: 320, after: 160 },
-    children: [
-      new TextRun({
-        text,
-        font: "Arial",
-        size: 32,
-        bold: true,
-        color: "1A3C6E",
-        rtl,
-      })
-    ]
-  });
-}
+    body {
+      font-family: 'IBM Plex Sans Arabic', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.9;
+      direction: rtl;
+    }
 
-function heading2(text) {
-  return new Paragraph({
-    heading: HeadingLevel.HEADING_2,
-    bidirectional: rtl,
-    alignment: AlignmentType.RIGHT,
-    spacing: { before: 240, after: 120 },
-    children: [
-      new TextRun({
-        text,
-        font: "Arial",
-        size: 26,
-        bold: true,
-        color: "2E5FA3",
-        rtl,
-      })
-    ]
-  });
-}
+    /* Page wrapper simulates a printed document */
+    .page-wrap {
+      max-width: 860px;
+      margin: 48px auto;
+      background: var(--white);
+      border-radius: 4px;
+      box-shadow: 0 4px 32px rgba(26,60,110,0.10);
+      overflow: hidden;
+    }
 
-function body(text) {
-  return new Paragraph({
-    bidirectional: rtl,
-    alignment: AlignmentType.RIGHT,
-    spacing: { before: 80, after: 80 },
-    children: [
-      new TextRun({
-        text,
-        font: "Arial",
-        size: 22,
-        rtl,
-      })
-    ]
-  });
-}
+    /* Header band */
+    .doc-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      padding: 52px 60px 42px;
+      text-align: center;
+      color: #fff;
+    }
 
-function bullet(label, desc) {
-  const children = [];
-  if (label) {
-    children.push(new TextRun({ text: label + ": ", font: "Arial", size: 22, bold: true, rtl }));
-  }
-  children.push(new TextRun({ text: desc, font: "Arial", size: 22, rtl }));
-  return new Paragraph({
-    bidirectional: rtl,
-    alignment: AlignmentType.RIGHT,
-    spacing: { before: 60, after: 60 },
-    indent: { right: 360 },
-    children: [
-      new TextRun({ text: "• ", font: "Arial", size: 22, rtl }),
-      ...children
-    ]
-  });
-}
+    .doc-header h1 {
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      margin-bottom: 10px;
+    }
 
-function emptyLine() {
-  return new Paragraph({
-    bidirectional: rtl,
-    children: [new TextRun({ text: "", size: 22 })]
-  });
-}
+    .doc-header .subtitle {
+      font-size: 0.95rem;
+      font-weight: 300;
+      opacity: 0.82;
+      letter-spacing: 0.03em;
+    }
 
-const doc = new Document({
-  styles: {
-    default: {
-      document: {
-        run: { font: "Arial", size: 22, rtl: true },
-        paragraph: { bidirectional: true, alignment: AlignmentType.RIGHT }
-      }
-    },
-    paragraphStyles: [
-      {
-        id: "Heading1", name: "Heading 1", basedOn: "Normal", next: "Normal", quickFormat: true,
-        run: { size: 32, bold: true, font: "Arial", color: "1A3C6E" },
-        paragraph: { spacing: { before: 320, after: 160 }, outlineLevel: 0, bidirectional: true, alignment: AlignmentType.RIGHT }
-      },
-      {
-        id: "Heading2", name: "Heading 2", basedOn: "Normal", next: "Normal", quickFormat: true,
-        run: { size: 26, bold: true, font: "Arial", color: "2E5FA3" },
-        paragraph: { spacing: { before: 240, after: 120 }, outlineLevel: 1, bidirectional: true, alignment: AlignmentType.RIGHT }
-      }
-    ]
-  },
-  sections: [{
-    properties: {
-      page: {
-        size: { width: 11906, height: 16838 },
-        margin: { top: 1440, right: 1800, bottom: 1440, left: 1800 }
-      },
-      bidi: true,
-    },
-    children: [
-      // Title
-      new Paragraph({
-        bidirectional: rtl,
-        alignment: AlignmentType.CENTER,
-        spacing: { before: 0, after: 200 },
-        border: {
-          bottom: { style: BorderStyle.SINGLE, size: 8, color: "1A3C6E", space: 10 }
-        },
-        children: [
-          new TextRun({
-            text: "سياسة الخصوصية لتطبيق Antra",
-            font: "Arial",
-            size: 48,
-            bold: true,
-            color: "1A3C6E",
-            rtl,
-          })
-        ]
-      }),
+    /* Body content */
+    .doc-body {
+      padding: 52px 60px 60px;
+    }
 
-      // Date
-      new Paragraph({
-        bidirectional: rtl,
-        alignment: AlignmentType.CENTER,
-        spacing: { before: 100, after: 400 },
-        children: [
-          new TextRun({
-            text: "آخر تحديث: 14 أبريل 2026",
-            font: "Arial",
-            size: 20,
-            color: "666666",
-            italics: true,
-            rtl,
-          })
-        ]
-      }),
+    /* Intro paragraph */
+    .intro {
+      font-size: 15px;
+      color: var(--muted);
+      border-right: 4px solid var(--accent);
+      padding: 14px 20px;
+      background: var(--light-accent);
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 40px;
+      line-height: 1.85;
+    }
 
-      // Intro
-      body("تصف سياسة الخصوصية هذه كيفية قيام تطبيق Antra بجمع المعلومات المتعلقة بك واستخدامها ومشاركتها عند استخدامك لتطبيقنا على الهاتف المحمول."),
+    /* Section */
+    .section {
+      margin-bottom: 38px;
+    }
 
-      emptyLine(),
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
+    }
 
-      // Section 1
-      heading1("١. المعلومات التي نجمعها"),
+    .section-num {
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
 
-      heading2("أ. المعلومات التي تقدمها أنت"),
-      bullet("معلومات الحساب", 'عند إنشاء حساب جديد، قد نجمع عنوان بريدك الإلكتروني ومعلومات الملف الشخصي الأخرى المقدَّمة عبر مزوّد المصادقة (Supabase).'),
-      bullet("تقدم التعلم", "نجمع البيانات المتعلقة بنشاطك التعليمي، بما في ذلك محاولات التدريب، والكلمات التي أتقنتها، ومعدلات الدقة، وسلاسل الإنجاز. تُستخدم هذه البيانات لتزويدك بالإحصائيات وتتبع تقدمك."),
-      bullet("محتوى المستخدم", "قد نجمع المعلومات التي تدخلها في التطبيق، مثل تفاعلات الدردشة أو التفضيلات."),
+    .section-title h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
 
-      emptyLine(),
-      heading2("ب. المعلومات المجمَّعة تلقائياً"),
-      body("عند استخدامك للتطبيق، قد نجمع تلقائياً بعض المعلومات، تشمل:"),
-      bullet("معلومات الجهاز", "نجمع معلومات عن جهازك المحمول، بما في ذلك طراز الجهاز، ونظام التشغيل وإصداره، والمعرّفات الفريدة للجهاز، ومعلومات شبكة الهاتف المحمول."),
-      bullet("معلومات الاستخدام", "نجمع معلومات حول نشاطك على التطبيق، مثل الميزات التي تستخدمها والوقت الذي تقضيه فيه."),
+    /* Sub-section */
+    .sub-section {
+      margin-bottom: 18px;
+      margin-top: 18px;
+    }
 
-      emptyLine(),
+    .sub-title {
+      font-size: 0.97rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-      // Section 2
-      heading1("٢. خدمات الطرف الثالث"),
-      body("نستخدم خدمات طرف ثالث قد تجمع معلومات تُستخدم للتعرف عليك:"),
+    .sub-title::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
 
-      heading2("أ. Supabase"),
-      body("نستخدم Supabase لخدمات المصادقة وقواعد البيانات. قد تجمع Supabase معلومات وفقاً لسياسة الخصوصية الخاصة بها."),
+    p {
+      margin-bottom: 10px;
+      color: var(--text);
+      font-size: 15px;
+    }
 
-      heading2("ب. Google Mobile Ads (AdMob)"),
-      body("نستخدم إعلانات Google Mobile Ads لعرض الإعلانات. قد تستخدم Google معرّفات الإعلانات (مثل IDFA على نظام iOS أو معرّف الإعلانات على نظام Android) لتقديم إعلانات مخصصة."),
+    /* Bullet list */
+    ul.policy-list {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 0 0;
+    }
 
-      heading2("ج. Expo"),
-      body("يتم تطوير التطبيق باستخدام إطار عمل Expo. قد تجمع Expo بعض المعلومات التشخيصية كجزء من بنيتها التحتية."),
+    ul.policy-list li {
+      padding: 7px 18px 7px 0;
+      border-bottom: 1px solid #f0f3f9;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+      line-height: 1.75;
+    }
 
-      emptyLine(),
+    ul.policy-list li:last-child { border-bottom: none; }
 
-      // Section 3
-      heading1("٣. كيفية استخدامنا لمعلوماتك"),
-      body("نستخدم المعلومات التي نجمعها من أجل:"),
-      bullet("", "توفير التطبيق وصيانته وتحسينه."),
-      bullet("", "مصادقة المستخدمين وإدارة الحسابات."),
-      bullet("", "عرض الإعلانات المخصصة (إن وُجدت)."),
-      bullet("", "الرد على تعليقاتك وأسئلتك وطلباتك."),
-      bullet("", "مراقبة الاتجاهات والاستخدام والأنشطة المتعلقة بتطبيقنا وتحليلها."),
+    ul.policy-list li::before {
+      content: '•';
+      color: var(--bullet);
+      font-size: 1.2rem;
+      line-height: 1.55;
+      flex-shrink: 0;
+    }
 
-      emptyLine(),
+    ul.policy-list li strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
 
-      // Section 4
-      heading1("٤. خياراتك والتحكم في بياناتك"),
+    /* Platform bullets (iOS/Android) */
+    .platform-list {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
 
-      heading2("أ. الإعلانات"),
-      body("يمكنك إلغاء الاشتراك في الإعلانات المبنية على الاهتمامات عن طريق ضبط إعدادات جهازك المحمول:"),
-      bullet("iOS", 'انتقل إلى الإعدادات > الخصوصية > التتبع، وقم بتعطيل "السماح للتطبيقات بطلب التتبع".'),
-      bullet("Android", 'انتقل إلى الإعدادات > Google > الإعلانات، وقم بتفعيل "إلغاء الاشتراك في تخصيص الإعلانات".'),
+    .platform-list li {
+      background: var(--light-accent);
+      border-radius: 6px;
+      padding: 10px 16px;
+      font-size: 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
 
-      emptyLine(),
-      heading2("ب. بيانات الحساب"),
-      body("يمكنك طلب حذف حسابك والبيانات المرتبطة به عن طريق التواصل معنا أو من خلال الإعدادات المتاحة داخل التطبيق."),
+    .platform-list li strong {
+      color: var(--primary);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
 
-      emptyLine(),
+    /* Footer */
+    .doc-footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 22px 60px;
+      color: var(--muted);
+      font-size: 13px;
+      background: #f2f5fb;
+    }
 
-      // Section 5
-      heading1("٥. الأمان"),
-      body("نتخذ تدابير معقولة للمساعدة في حماية معلوماتك من الفقدان والسرقة وسوء الاستخدام والوصول غير المصرح به والإفصاح والتعديل والتدمير."),
+    @media (max-width: 700px) {
+      .page-wrap { margin: 0; border-radius: 0; }
+      .doc-header { padding: 36px 24px 28px; }
+      .doc-body { padding: 32px 24px 40px; }
+      .doc-footer { padding: 18px 24px; }
+    }
 
-      emptyLine(),
+    @media print {
+      body { background: white; }
+      .page-wrap { box-shadow: none; margin: 0; }
+    }
+  </style>
+</head>
+<body>
 
-      // Section 6
-      heading1("٦. خصوصية الأطفال"),
-      body("لا يستهدف تطبيقنا الأطفال دون سن 13 عاماً. نحن لا نجمع عن قصد معلومات شخصية من الأطفال الذين تقل أعمارهم عن 13 عاماً."),
+<div class="page-wrap">
 
-      emptyLine(),
+  <!-- Header -->
+  <div class="doc-header">
+    <h1>سياسة الخصوصية لتطبيق Antra</h1>
+    <div class="subtitle">آخر تحديث: 14 أبريل 2026</div>
+  </div>
 
-      // Section 7
-      heading1("٧. التغييرات على هذه السياسة"),
-      body("قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر. إذا أجرينا تغييرات، سنُعلمك بذلك عن طريق تعديل التاريخ في أعلى السياسة."),
+  <!-- Body -->
+  <div class="doc-body">
 
-      emptyLine(),
+    <p class="intro">
+      تصف سياسة الخصوصية هذه كيفية قيام تطبيق <strong>Antra</strong> بجمع المعلومات المتعلقة بك واستخدامها ومشاركتها عند استخدامك لتطبيقنا على الهاتف المحمول.
+    </p>
 
-      // Section 8
-      heading1("٨. اتصل بنا"),
-      body("إذا كان لديك أي أسئلة حول سياسة الخصوصية هذه، يُرجى التواصل معنا على: [بريدك الإلكتروني / رابط التواصل]"),
+    <!-- Section 1 -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">١</div>
+        <h2>المعلومات التي نجمعها</h2>
+      </div>
 
-      emptyLine(),
+      <div class="sub-section">
+        <div class="sub-title">أ. المعلومات التي تقدمها أنت</div>
+        <ul class="policy-list">
+          <li><span><strong>معلومات الحساب:</strong> عند إنشاء حساب جديد، قد نجمع عنوان بريدك الإلكتروني ومعلومات الملف الشخصي الأخرى المقدَّمة عبر مزوّد المصادقة (Supabase).</span></li>
+          <li><span><strong>تقدم التعلم:</strong> نجمع البيانات المتعلقة بنشاطك التعليمي، بما في ذلك محاولات التدريب، والكلمات التي أتقنتها، ومعدلات الدقة، وسلاسل الإنجاز. تُستخدم هذه البيانات لتزويدك بالإحصائيات وتتبع تقدمك.</span></li>
+          <li><span><strong>محتوى المستخدم:</strong> قد نجمع المعلومات التي تدخلها في التطبيق، مثل تفاعلات الدردشة أو التفضيلات.</span></li>
+        </ul>
+      </div>
 
-      // Footer note
-      new Paragraph({
-        bidirectional: rtl,
-        alignment: AlignmentType.CENTER,
-        spacing: { before: 400, after: 0 },
-        border: {
-          top: { style: BorderStyle.SINGLE, size: 4, color: "CCCCCC", space: 10 }
-        },
-        children: [
-          new TextRun({
-            text: "© 2026 Antra. جميع الحقوق محفوظة.",
-            font: "Arial",
-            size: 18,
-            color: "888888",
-            rtl,
-          })
-        ]
-      }),
-    ]
-  }]
-});
+      <div class="sub-section">
+        <div class="sub-title">ب. المعلومات المجمَّعة تلقائياً</div>
+        <p>عند استخدامك للتطبيق، قد نجمع تلقائياً بعض المعلومات، تشمل:</p>
+        <ul class="policy-list">
+          <li><span><strong>معلومات الجهاز:</strong> نجمع معلومات عن جهازك المحمول، بما في ذلك طراز الجهاز، ونظام التشغيل وإصداره، والمعرّفات الفريدة للجهاز، ومعلومات شبكة الهاتف المحمول.</span></li>
+          <li><span><strong>معلومات الاستخدام:</strong> نجمع معلومات حول نشاطك على التطبيق، مثل الميزات التي تستخدمها والوقت الذي تقضيه فيه.</span></li>
+        </ul>
+      </div>
+    </div>
 
-Packer.toBuffer(doc).then(buffer => {
-  fs.writeFileSync("/mnt/user-data/outputs/Antra_Privacy_Policy_AR.docx", buffer);
-  console.log("Done!");
-});
+    <!-- Section 2 -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">٢</div>
+        <h2>خدمات الطرف الثالث</h2>
+      </div>
+      <p>نستخدم خدمات طرف ثالث قد تجمع معلومات تُستخدم للتعرف عليك:</p>
+
+      <div class="sub-section">
+        <div class="sub-title">أ. Supabase</div>
+        <p>نستخدم Supabase لخدمات المصادقة وقواعد البيانات. قد تجمع Supabase معلومات وفقاً لسياسة الخصوصية الخاصة بها.</p>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-title">ب. Google Mobile Ads (AdMob)</div>
+        <p>نستخدم إعلانات Google Mobile Ads لعرض الإعلانات. قد تستخدم Google معرّفات الإعلانات (مثل IDFA على نظام iOS أو معرّف الإعلانات على نظام Android) لتقديم إعلانات مخصصة.</p>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-title">ج. Expo</div>
+        <p>يتم تطوير التطبيق باستخدام إطار عمل Expo. قد تجمع Expo بعض المعلومات التشخيصية كجزء من بنيتها التحتية.</p>
+      </div>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">٣</div>
+        <h2>كيفية استخدامنا لمعلوماتك</h2>
+      </div>
+      <p>نستخدم المعلومات التي نجمعها من أجل:</p>
+      <ul class="policy-list">
+        <li><span>توفير التطبيق وصيانته وتحسينه.</span></li>
+        <li><span>مصادقة المستخدمين وإدارة الحسابات.</span></li>
+        <li><span>عرض الإعلانات المخصصة (إن وُجدت).</span></li>
+        <li><span>الرد على تعليقاتك وأسئلتك وطلباتك.</span></li>
+        <li><span>مراقبة الاتجاهات والاستخدام والأنشطة المتعلقة بتطبيقنا وتحليلها.</span></li>
+      </ul>
+    </div>
+
+    <!-- Section 4 -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">٤</div>
+        <h2>خياراتك والتحكم في بياناتك</h2>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-title">أ. الإعلانات</div>
+        <p>يمكنك إلغاء الاشتراك في الإعلانات المبنية على الاهتمامات عن طريق ضبط إعدادات جهازك المحمول:</p>
+        <ul class="platform-list">
+          <li><strong>iOS:</strong> انتقل إلى الإعدادات &gt; الخصوصية &gt; التتبع، وقم بتعطيل "السماح للتطبيقات بطلب التتبع".</li>
+          <li><strong>Android:</strong> انتقل إلى الإعدادات &gt; Google &gt; الإعلانات، وقم بتفعيل "إلغاء الاشتراك في تخصيص الإعلانات".</li>
+        </ul>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-title">ب. بيانات الحساب</div>
+        <p>يمكنك طلب حذف حسابك والبيانات المرتبطة به عن طريق التواصل معنا أو من خلال الإعدادات المتاحة داخل التطبيق.</p>
+      </div>
+    </div>
+
+    <!-- Section 5 -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">٥</div>
+        <h2>الأمان</h2>
+      </div>
+      <p>نتخذ تدابير معقولة للمساعدة في حماية معلوماتك من الفقدان والسرقة وسوء الاستخدام والوصول غير المصرح به والإفصاح والتعديل والتدمير.</p>
+    </div>
+
+    <!-- Section 6 -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">٦</div>
+        <h2>خصوصية الأطفال</h2>
+      </div>
+      <p>لا يستهدف تطبيقنا الأطفال دون سن 13 عاماً. نحن لا نجمع عن قصد معلومات شخصية من الأطفال الذين تقل أعمارهم عن 13 عاماً.</p>
+    </div>
+
+    <!-- Section 7 -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">٧</div>
+        <h2>التغييرات على هذه السياسة</h2>
+      </div>
+      <p>قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر. إذا أجرينا تغييرات، سنُعلمك بذلك عن طريق تعديل التاريخ في أعلى السياسة.</p>
+    </div>
+
+    <!-- Section 8 -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">٨</div>
+        <h2>اتصل بنا</h2>
+      </div>
+      <p>إذا كان لديك أي أسئلة حول سياسة الخصوصية هذه، يُرجى التواصل معنا على: <strong>[بريدك الإلكتروني / رابط التواصل]</strong></p>
+    </div>
+
+  </div><!-- /doc-body -->
+
+  <div class="doc-footer">
+    © 2026 Antra. جميع الحقوق محفوظة.
+  </div>
+
+</div><!-- /page-wrap -->
+
+</body>
+</html>
