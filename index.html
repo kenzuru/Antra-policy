@@ -11,11 +11,16 @@
       --accent: #2E5FA3;
       --light-accent: #E8F0FB;
       --text: #1a1a2e;
-      --muted: #666680;
+      --muted: #555570;
       --border: #d0d8e8;
       --bg: #f7f9fd;
       --white: #ffffff;
       --bullet: #2E5FA3;
+      --badge-bg: #e0eafd;
+      --badge-color: #1A3C6E;
+      --warning-bg: #fff8e6;
+      --warning-border: #f59e0b;
+      --link-color: #2E5FA3;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,26 +34,24 @@
       direction: rtl;
     }
 
-    /* Page wrapper simulates a printed document */
     .page-wrap {
-      max-width: 860px;
-      margin: 48px auto;
+      max-width: 900px;
+      margin: 40px auto;
       background: var(--white);
-      border-radius: 4px;
+      border-radius: 8px;
       box-shadow: 0 4px 32px rgba(26,60,110,0.10);
       overflow: hidden;
     }
 
-    /* Header band */
     .doc-header {
       background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-      padding: 52px 60px 42px;
+      padding: 52px 50px 42px;
       text-align: center;
       color: #fff;
     }
 
     .doc-header h1 {
-      font-size: 2.1rem;
+      font-size: 2.2rem;
       font-weight: 700;
       letter-spacing: 0.01em;
       margin-bottom: 10px;
@@ -56,38 +59,35 @@
 
     .doc-header .subtitle {
       font-size: 0.95rem;
-      font-weight: 300;
-      opacity: 0.82;
+      font-weight: 400;
+      opacity: 0.9;
       letter-spacing: 0.03em;
     }
 
-    /* Body content */
     .doc-body {
-      padding: 52px 60px 60px;
+      padding: 50px 55px 60px;
     }
 
-    /* Intro paragraph */
     .intro {
-      font-size: 15px;
-      color: var(--muted);
+      font-size: 15.5px;
+      color: var(--text);
       border-right: 4px solid var(--accent);
-      padding: 14px 20px;
+      padding: 16px 22px;
       background: var(--light-accent);
-      border-radius: 0 6px 6px 0;
-      margin-bottom: 40px;
-      line-height: 1.85;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 36px;
+      line-height: 1.9;
     }
 
-    /* Section */
     .section {
-      margin-bottom: 38px;
+      margin-bottom: 42px;
     }
 
     .section-title {
       display: flex;
       align-items: center;
       gap: 14px;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
       padding-bottom: 10px;
       border-bottom: 2px solid var(--border);
     }
@@ -95,7 +95,7 @@
     .section-num {
       background: var(--primary);
       color: #fff;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       font-weight: 700;
       width: 34px;
       height: 34px;
@@ -107,20 +107,19 @@
     }
 
     .section-title h2 {
-      font-size: 1.15rem;
+      font-size: 1.25rem;
       font-weight: 700;
       color: var(--primary);
     }
 
-    /* Sub-section */
     .sub-section {
-      margin-bottom: 18px;
+      margin-bottom: 22px;
       margin-top: 18px;
     }
 
     .sub-title {
-      font-size: 0.97rem;
-      font-weight: 600;
+      font-size: 1.02rem;
+      font-weight: 700;
       color: var(--accent);
       margin-bottom: 10px;
       display: flex;
@@ -139,26 +138,48 @@
     }
 
     p {
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       color: var(--text);
       font-size: 15px;
+      line-height: 1.9;
     }
 
-    /* Bullet list */
+    a {
+      color: var(--link-color);
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: var(--primary);
+    }
+
+    .highlight-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 14px 0 20px;
+    }
+
+    .highlight-card.alert {
+      background: var(--warning-bg);
+      border-color: var(--warning-border);
+    }
+
     ul.policy-list {
       list-style: none;
       padding: 0;
-      margin: 8px 0 0 0;
+      margin: 10px 0 16px 0;
     }
 
     ul.policy-list li {
-      padding: 7px 18px 7px 0;
-      border-bottom: 1px solid #f0f3f9;
+      padding: 9px 18px 9px 0;
+      border-bottom: 1px solid #edf2f7;
       display: flex;
       align-items: flex-start;
       gap: 12px;
       font-size: 15px;
-      line-height: 1.75;
+      line-height: 1.8;
     }
 
     ul.policy-list li:last-child { border-bottom: none; }
@@ -166,34 +187,46 @@
     ul.policy-list li::before {
       content: '•';
       color: var(--bullet);
-      font-size: 1.2rem;
-      line-height: 1.55;
+      font-size: 1.3rem;
+      line-height: 1.4;
       flex-shrink: 0;
     }
 
     ul.policy-list li strong {
       color: var(--primary);
-      font-weight: 600;
+      font-weight: 700;
     }
 
-    /* Platform bullets (iOS/Android) */
+    .tech-badge {
+      display: inline-block;
+      background: var(--badge-bg);
+      color: var(--badge-color);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 2px 9px;
+      border-radius: 4px;
+      margin-right: 6px;
+      direction: ltr;
+    }
+
     .platform-list {
       list-style: none;
       padding: 0;
-      margin: 8px 0;
+      margin: 12px 0;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
     }
 
     .platform-list li {
       background: var(--light-accent);
-      border-radius: 6px;
-      padding: 10px 16px;
-      font-size: 14px;
+      border-radius: 8px;
+      padding: 12px 18px;
+      font-size: 14.5px;
       display: flex;
       align-items: flex-start;
-      gap: 10px;
+      gap: 12px;
+      line-height: 1.7;
     }
 
     .platform-list li strong {
@@ -202,21 +235,57 @@
       flex-shrink: 0;
     }
 
-    /* Footer */
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin-top: 14px;
+      margin-bottom: 20px;
+    }
+
+    .service-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .service-card h4 {
+      color: var(--primary);
+      font-size: 0.98rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .service-card p {
+      font-size: 13.5px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      line-height: 1.7;
+    }
+
+    .service-card a {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
     .doc-footer {
       border-top: 1px solid var(--border);
       text-align: center;
-      padding: 22px 60px;
+      padding: 24px 50px;
       color: var(--muted);
-      font-size: 13px;
+      font-size: 13.5px;
       background: #f2f5fb;
     }
 
     @media (max-width: 700px) {
       .page-wrap { margin: 0; border-radius: 0; }
-      .doc-header { padding: 36px 24px 28px; }
-      .doc-body { padding: 32px 24px 40px; }
+      .doc-header { padding: 38px 24px 30px; }
+      .doc-body { padding: 32px 20px 40px; }
       .doc-footer { padding: 18px 24px; }
+      .service-grid { grid-template-columns: 1fr; }
     }
 
     @media print {
@@ -229,152 +298,391 @@
 
 <div class="page-wrap">
 
-  <!-- Header -->
   <div class="doc-header">
     <h1>سياسة الخصوصية لتطبيق Antra</h1>
-    <div class="subtitle">آخر تحديث: 14 أبريل 2026</div>
+    <div class="subtitle">تاريخ التحديث: 4 سبتمبر 2026</div>
   </div>
 
-  <!-- Body -->
   <div class="doc-body">
 
     <p class="intro">
-      تصف سياسة الخصوصية هذه كيفية قيام تطبيق <strong>Antra</strong> بجمع المعلومات المتعلقة بك واستخدامها ومشاركتها عند استخدامك لتطبيقنا على الهاتف المحمول.
+      تصف سياسة الخصوصية هذه بشفافية ووضوح تام كيفية قيام تطبيق <strong>Antra</strong> بجمع معلوماتك واستخدامها ومعالجتها وحمايتها عند استخدامك لتطبيق الهاتف المحمول الخاص بنا. نحن نلتزم بحماية بياناتك الشخصية وتزويدك ببيئة تعليمية آمنة وموثوقة.
     </p>
 
-    <!-- Section 1 -->
+    <!-- Section 1: Application Operator -->
     <div class="section">
       <div class="section-title">
         <div class="section-num">١</div>
-        <h2>المعلومات التي نجمعها</h2>
+        <h2>الجهة المشغّلة للتطبيق</h2>
       </div>
-
-      <div class="sub-section">
-        <div class="sub-title">أ. المعلومات التي تقدمها أنت</div>
-        <ul class="policy-list">
-          <li><span><strong>معلومات الحساب:</strong> عند إنشاء حساب جديد، قد نجمع عنوان بريدك الإلكتروني ومعلومات الملف الشخصي الأخرى المقدَّمة عبر مزوّد المصادقة (Supabase).</span></li>
-          <li><span><strong>تقدم التعلم:</strong> نجمع البيانات المتعلقة بنشاطك التعليمي، بما في ذلك محاولات التدريب، والكلمات التي أتقنتها، ومعدلات الدقة، وسلاسل الإنجاز. تُستخدم هذه البيانات لتزويدك بالإحصائيات وتتبع تقدمك.</span></li>
-          <li><span><strong>محتوى المستخدم:</strong> قد نجمع المعلومات التي تدخلها في التطبيق، مثل تفاعلات الدردشة أو التفضيلات.</span></li>
-        </ul>
-      </div>
-
-      <div class="sub-section">
-        <div class="sub-title">ب. المعلومات المجمَّعة تلقائياً</div>
-        <p>عند استخدامك للتطبيق، قد نجمع تلقائياً بعض المعلومات، تشمل:</p>
-        <ul class="policy-list">
-          <li><span><strong>معلومات الجهاز:</strong> نجمع معلومات عن جهازك المحمول، بما في ذلك طراز الجهاز، ونظام التشغيل وإصداره، والمعرّفات الفريدة للجهاز، ومعلومات شبكة الهاتف المحمول.</span></li>
-          <li><span><strong>معلومات الاستخدام:</strong> نجمع معلومات حول نشاطك على التطبيق، مثل الميزات التي تستخدمها والوقت الذي تقضيه فيه.</span></li>
-        </ul>
-      </div>
+      <p>
+        يتم تشغيل وإدارة تطبيق <strong>Antra</strong> بواسطة فريق تطوير <strong>Antra ("نحن" أو "التطبيق")</strong>. نحن الجهة المسؤولة عن معالجة وحماية البيانات الشخصية التي يجمعها التطبيق وفقاً لهذه السياسة. إذا كانت لديك أي استفسارات حول إدارة تطبيقنا أو الخصوصية، يمكنك التواصل معنا عبر البريد الإلكتروني الرسمي للدعم الفني: <strong>support@antra.uk</strong> أو <strong>antrahere9@gmail.com</strong>.
+      </p>
     </div>
 
-    <!-- Section 2 -->
+    <!-- Section 2: Information We Collect -->
     <div class="section">
       <div class="section-title">
         <div class="section-num">٢</div>
-        <h2>خدمات الطرف الثالث</h2>
-      </div>
-      <p>نستخدم خدمات طرف ثالث قد تجمع معلومات تُستخدم للتعرف عليك:</p>
-
-      <div class="sub-section">
-        <div class="sub-title">أ. Supabase</div>
-        <p>نستخدم Supabase لخدمات المصادقة وقواعد البيانات. قد تجمع Supabase معلومات وفقاً لسياسة الخصوصية الخاصة بها.</p>
+        <h2>المعلومات التي نجمعها وتفاصيل معالجتها</h2>
       </div>
 
       <div class="sub-section">
-        <div class="sub-title">ب. Google Mobile Ads (AdMob)</div>
-        <p>نستخدم إعلانات Google Mobile Ads لعرض الإعلانات. قد تستخدم Google معرّفات الإعلانات (مثل IDFA على نظام iOS أو معرّف الإعلانات على نظام Android) لتقديم إعلانات مخصصة.</p>
-      </div>
-
-      <div class="sub-section">
-        <div class="sub-title">ج. Expo</div>
-        <p>يتم تطوير التطبيق باستخدام إطار عمل Expo. قد تجمع Expo بعض المعلومات التشخيصية كجزء من بنيتها التحتية.</p>
-      </div>
-    </div>
-
-    <!-- Section 3 -->
-    <div class="section">
-      <div class="section-title">
-        <div class="section-num">٣</div>
-        <h2>كيفية استخدامنا لمعلوماتك</h2>
-      </div>
-      <p>نستخدم المعلومات التي نجمعها من أجل:</p>
-      <ul class="policy-list">
-        <li><span>توفير التطبيق وصيانته وتحسينه.</span></li>
-        <li><span>مصادقة المستخدمين وإدارة الحسابات.</span></li>
-        <li><span>عرض الإعلانات المخصصة (إن وُجدت).</span></li>
-        <li><span>الرد على تعليقاتك وأسئلتك وطلباتك.</span></li>
-        <li><span>مراقبة الاتجاهات والاستخدام والأنشطة المتعلقة بتطبيقنا وتحليلها.</span></li>
-      </ul>
-    </div>
-
-    <!-- Section 4 -->
-    <div class="section">
-      <div class="section-title">
-        <div class="section-num">٤</div>
-        <h2>خياراتك والتحكم في بياناتك</h2>
-      </div>
-
-      <div class="sub-section">
-        <div class="sub-title">أ. الإعلانات</div>
-        <p>يمكنك إلغاء الاشتراك في الإعلانات المبنية على الاهتمامات عن طريق ضبط إعدادات جهازك المحمول:</p>
-        <ul class="platform-list">
-          <li><strong>iOS:</strong> انتقل إلى الإعدادات &gt; الخصوصية &gt; التتبع، وقم بتعطيل "السماح للتطبيقات بطلب التتبع".</li>
-          <li><strong>Android:</strong> انتقل إلى الإعدادات &gt; Google &gt; الإعلانات، وقم بتفعيل "إلغاء الاشتراك في تخصيص الإعلانات".</li>
+        <div class="sub-title">أ. معلومات الحساب والهوية</div>
+        <ul class="policy-list">
+          <li>
+            <span>
+              <strong>بيانات التسجيل والمصادقة:</strong>
+              عند إنشاء حساب، نجمع عنوان بريدك الإلكتروني والمعرّف الفريد الخاص بك (<span class="tech-badge">User UUID</span>). يتم إدارة وتأمين عملية المصادقة عبر خدمة <strong>Supabase Auth</strong>. كما يمكنك اختيار التسجيل المباشر عبر حساب <strong>Google (Google Sign-In)</strong>.
+            </span>
+          </li>
+          <li>
+            <span>
+              <strong>تفضيلات الملف الشخصي:</strong>
+              نحفظ التفضيلات التشغيلية التي تختارها داخل التطبيق، مثل الصورة الرمزية (<span class="tech-badge">Avatar</span>)، لغة واجهة التطبيق المفضلة (العربية أو الإنجليزية)، وهدفك التعليمي اليومي (بالدقائق).
+            </span>
+          </li>
         </ul>
       </div>
 
       <div class="sub-section">
-        <div class="sub-title">ب. بيانات الحساب</div>
-        <p>.يمكنك طلب حذف حسابك والبيانات المرتبطة به عن طريق التواصل معنا عن طريق منصاتنا على مواقع التواصل الاجتماعي او بريدنا الالكتروني
-          antrahere9@gmail.com
+        <div class="sub-title">ب. البيانات التعليمية ونشاط التعلم</div>
+        <ul class="policy-list">
+          <li>
+            <span>
+              <strong>اختبارات تحديد المستوى والتقدم:</strong>
+              نخزن نتائج اختبارات تحديد المستوى اللغوي (<span class="tech-badge">CEFR Levels</span> مثل A1, A2, B1, B2, C1, C2) ونقاط الخبرة (<span class="tech-badge">XP</span>) وتواريخ سلاسل الإنجاز اليومي (<span class="tech-badge">Streaks</span>) وترتيبك في لوحة الصدارة (<span class="tech-badge">Leaderboard</span>).
+            </span>
+          </li>
+          <li>
+            <span>
+              <strong>القاموس الشخصي ومفردات التعلم:</strong>
+              نجمع ونزامن الكلمات والعبارات التي تحفظها، ومستويات إتقانك لكل كلمة، وسجل التكرار والمراجعة والأنشطة التفاعلية وحذف المفردات.
+            </span>
+          </li>
+          <li>
+            <span>
+              <strong>نشاط القراءة والتقدم:</strong>
+              نحفظ فقط معرّفات الكتب والفصول التي تقرأها، وتاريخ آخر قراءة، لمزامنة تقدمك عبر أجهزتك. جميع ملفات الكتب أو النصوص الشخصية التي تفتحها تظل مخزنة على جهازك المحمول فقط ولا يتم رفع محتواها إلى سيرفراتنا.
+            </span>
+          </li>
+          <li>
+            <span>
+              <strong>بلاغات الأخطاء والتغذية الراجعة:</strong>
+              نجمع البلاغات والملاحظات التي ترسلها اختيارياً حول ترجمة الكلمات أو تصحيحات المعاني لتحسين جودة القاموس والمحتوى.
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-title">ج. معالجة الذكاء الاصطناعي وشرح الكلمات</div>
+        <div class="highlight-card">
+          <p>
+            <strong>كيف تعمل ميزات الذكاء الاصطناعي في التطبيق؟</strong><br />
+            عندما تستخدم ميزة الشرح الذكي للكلمة أثناء قراءة الكتب المدمجة أو النصوص والملفات الشخصية التي تفتحها داخل التطبيق، يتم إرسال الكلمة المحددة والجملة المحيطة بها فقط (بحد أقصى 200 حرف) عبر وظائفنا السحابية الآمنة (<span class="tech-badge">Supabase Edge Functions</span>) إلى معالجات الذكاء الاصطناعي (<span class="tech-badge">Groq</span> / <span class="tech-badge">OpenRouter</span>) لتوليد الشرح والمعنى بالسياق.
           </p>
+          <p style="font-size:14px; color:var(--muted);">
+            • لا يتم إرسال اسمك أو بريدك الإلكتروني أو أي معرّف شخصي آخر مع طلبات الذكاء الاصطناعي — الطلب يقتصر على الكلمة والجملة النصية المحيطة بها فقط لتحديد المعنى اللغوي.<br />
+            • نستخدم، حيثما توفر ذلك لدى مزودي الخدمة، إعدادات وخطط الدفع التي تُعطّل استخدام البيانات لتدريب النماذج العامة. مع ذلك، نوصي بمراجعة سياسات الخصوصية الخاصة بمزودي الذكاء الاصطناعي لمزيد من التفاصيل.
+          </p>
+          <p style="margin-bottom:0; font-size:14px; color:var(--muted);">
+            • لتقليل عدد الطلبات المرسلة للذكاء الاصطناعي وتسريع الاستجابة، نحتفظ بنسخة من الشروحات الناتجة في قاعدة بيانات <strong>مشتركة وغير مرتبطة بهويتك الشخصية</strong> (لا تحتوي على معرّف المستخدم)، بحيث إذا طلب شرح نفس الكلمة بنفس الجملة مستخدم آخر لاحقاً، يتم عرض الشرح المخزّن مباشرة دون إرسال طلب جديد للذكاء الاصطناعي.
+          </p>
+        </div>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-title">د. بيانات الاشتراك والدفع</div>
+        <div class="highlight-card">
+          <p>
+            عند الاشتراك في العضوية المميزة (Premium/Plus)، تتم معالجة عملية الدفع عبر بوابة دفع خارجية آمنة على الويب (<span class="tech-badge">Wayl</span>).
+          </p>
+          <p style="margin-bottom:0; font-size:14px; color:var(--muted);">
+            • لا يقوم تطبيق Antra أو سيرفراتنا بتخزين أو الاطلاع على بيانات بطاقتك الائتمانية الكاملة في أي وقت — تتم معالجتها بالكامل داخل بيئة Wayl المشفرة.<br />
+            • نحتفظ فقط بحالة اشتراكك (نشط / منتهي)، تاريخ بدء وانتهاء الاشتراك، ومعرّف عملية الدفع (Transaction ID) للأغراض المحاسبية ودعم العملاء.
+          </p>
+        </div>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-title">هـ. المعلومات المجمَّعة تلقائياً وتحليلات الأداء</div>
+        <ul class="policy-list">
+          <li>
+            <span>
+              <strong>تحليلات الاستخدام والسلوك (PostHog):</strong>
+              نستخدم مكتبة <strong>PostHog</strong> لتجميع بيانات تحليلات الأداء والتفاعل الفعلي (مثل: فتح الفصول، إكمال جلسات التدريب، تغيير الإعدادات، وأسماء الشاشات التي تزورها). يرتبط هذا النشاط بمعرّف المستخدم المشفر (<span class="tech-badge">User UUID</span>) لفهم كيفية استخدام التطبيق وتطوير ميزاته، دون تتبع البريد الإلكتروني أو بيانات الاعتماد في التحليلات.
+            </span>
+          </li>
+          <li>
+            <span>
+              <strong>بيانات الجهاز والشبكة:</strong>
+              نجمع تلقائياً معرّفات الجهاز الفريدة، طراز الهاتف ونوعه، نظام التشغيل وإصداره (<span class="tech-badge">iOS / Android</span>)، وعنوان الـ <span class="tech-badge">IP</span>، ولغة الجهاز الأساسية، لمعالجة الأخطاء التشخيصية وضمان توافق التطبيق.
+            </span>
+          </li>
+          <li>
+            <span>
+              <strong>معرّفات الإعلانات:</strong>
+              قد نجمع معرّفات الإعلانات الخاصة بجهازك (مثل معرّف <span class="tech-badge">IDFA</span> على نظام iOS عند إعطاء الإذن، أو معرّف الإعلانات <span class="tech-badge">GAID</span> على نظام Android) وعنوان الـ IP لتقديم وتقييم الإعلانات عبر شبكة <strong>Google Mobile Ads (AdMob)</strong>.
+            </span>
+          </li>
+        </ul>
       </div>
     </div>
 
-    <!-- Section 5 -->
+    <!-- Section 3: Ads & Personalization -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">٣</div>
+        <h2>سياسة الإعلانات والتخصيص</h2>
+      </div>
+      <p>
+        يعتمد تطبيق <strong>Antra</strong> على عرض <strong>الإعلانات المناسبة</strong> لتمويل وتوفير الميزات المجانية في التطبيق عبر شبكة Google Mobile Ads (AdMob). نوضح الفرق بين نوعين من الإعلانات التي قد تُعرض لك:
+      </p>
+      <ul class="policy-list">
+        <li>
+          <span>
+            <strong>الإعلانات المخصصة (Personalized Ads):</strong>
+            إذا منحت التطبيق إذن التتبع الإعلاني (عبر نافذة شفافية تتبع التطبيقات ATT على iOS أو إعدادات الإعلانات على Android)، ستستخدم Google معرّف الإعلانات الخاص بجهازك لعرض إعلانات مخصصة تعتمد على اهتماماتك ونشاطك الرقمي السابق.
+          </span>
+        </li>
+        <li>
+          <span>
+            <strong>الإعلانات غير المخصصة (Non-Personalized Ads):</strong>
+            إذا قمت برفض إذن التتبع أو تعطيل تخصيص الإعلانات في جهازك، فلن تُستخدم معرّفات الإعلانات لتتبع اهتماماتك. في هذه الحالة، ستظل تشاهد إعلانات، لكنها ستكون إعلانات عامة وغير مخصصة وتعتمد فقط على المحتوى الحالي للتطبيق أو الموقع الجغرافي العام للجهاز.
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Section 4: Third-Party Services & Links -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">٤</div>
+        <h2>خدمات الطرف الثالث وروابط سياسات الخصوصية</h2>
+      </div>
+      <p>لتشغيل التطبيق بكفاءة، نعتمد على خدمات طرف ثالث موثوقة نستخدمها فعلياً. تخضع معالجة بياناتك عبر هذه الخدمات لسياستنا بالإضافة إلى سياسات الخصوصية الخاصة بكل مزود:</p>
+
+      <div class="service-grid">
+        <div class="service-card">
+          <h4>Supabase</h4>
+          <p>إدارة قاعدة البيانات والمصادقة والوظائف السحابية (Edge Functions).</p>
+          <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer">عرض سياسة خصوصية Supabase &larr;</a>
+        </div>
+
+        <div class="service-card">
+          <h4>PostHog Analytics</h4>
+          <p>تحليل الأحداث وتفاعلات المستخدمين داخل التطبيق لتحسين الأداء.</p>
+          <a href="https://posthog.com/privacy" target="_blank" rel="noopener noreferrer">عرض سياسة خصوصية PostHog &larr;</a>
+        </div>
+
+        <div class="service-card">
+          <h4>Google & Google Sign-In</h4>
+          <p>تسهيل الدخول الآمن ومصادقة الحسابات عبر Google.</p>
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">عرض سياسة خصوصية Google &larr;</a>
+        </div>
+
+        <div class="service-card">
+          <h4>Google Mobile Ads (AdMob)</h4>
+          <p>عرض وتقييم الإعلانات التجارية المخصصة وغير المخصصة.</p>
+          <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">عرض سياسة إعلانات Google &larr;</a>
+        </div>
+
+        <div class="service-card">
+          <h4>Groq</h4>
+          <p>معالجة الذكاء الاصطناعي وتوليد شروحات الكلمات والجمل في السياق.</p>
+          <a href="https://groq.com/privacy-policy/" target="_blank" rel="noopener noreferrer">عرض سياسة خصوصية Groq &larr;</a>
+        </div>
+
+        <div class="service-card">
+          <h4>OpenRouter</h4>
+          <p>بوابة نماذج الذكاء الاصطناعي لتوليد الشروحات والترجمات اللغوية.</p>
+          <a href="https://openrouter.ai/privacy" target="_blank" rel="noopener noreferrer">عرض سياسة خصوصية OpenRouter &larr;</a>
+        </div>
+
+        <div class="service-card">
+          <h4>Wayl</h4>
+          <p>بوابة دفع إلكترونية لمعالجة اشتراكات العضوية.</p>
+          <a href="https://wayl.app/privacy" target="_blank" rel="noopener noreferrer">عرض سياسة خصوصية Wayl &larr;</a>
+        </div>
+
+        <div class="service-card">
+          <h4>Expo Framework</h4>
+          <p>البنية التحتية لتطوير التطبيق والتحديثات البرمجية والتشخيص.</p>
+          <a href="https://expo.dev/privacy" target="_blank" rel="noopener noreferrer">عرض سياسة خصوصية Expo &larr;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 5: International Data Transfer -->
     <div class="section">
       <div class="section-title">
         <div class="section-num">٥</div>
-        <h2>الأمان</h2>
+        <h2>النقل والمعالجة الدولية للبيانات</h2>
       </div>
-      <p>نتخذ تدابير معقولة للمساعدة في حماية معلوماتك من الفقدان والسرقة وسوء الاستخدام والوصول غير المصرح به والإفصاح والتعديل والتدمير.</p>
+      <div class="highlight-card">
+        <p style="margin-bottom:0;">
+          قد تتم معالجة بعض بياناتك أو تخزينها على خوادم تقع خارج العراق، وذلك حسب مواقع البنية التحتية لمزودي الخدمات الذين نستخدمهم. نحن نختار مزودي خدمات موثوقين ونطبق إجراءات تقنية وتنظيمية مناسبة لحماية البيانات أثناء نقلها ومعالجتها، مع مراعاة سياسات وممارسات كل مزود خدمة.
+        </p>
+      </div>
     </div>
 
-    <!-- Section 6 -->
+    <!-- Section 6: How We Use Your Data -->
     <div class="section">
       <div class="section-title">
         <div class="section-num">٦</div>
-        <h2>خصوصية الأطفال</h2>
+        <h2>كيفية استخدامنا لمعلوماتك</h2>
       </div>
-      <p>لا يستهدف تطبيقنا الأطفال دون سن 13 عاماً. نحن لا نجمع عن قصد معلومات شخصية من الأطفال الذين تقل أعمارهم عن 13 عاماً.</p>
+      <p>نستخدم البيانات التي نجمعها للأغراض التالية فقط:</p>
+      <ul class="policy-list">
+        <li><span><strong>توفير الخدمة وتخصيصها:</strong> تقديم محتوى قراءة ومفردات تتناسب مع مستواك اللغوي وتتبع إنجازاتك.</span></li>
+        <li><span><strong>المزامنة وحفظ التقدم:</strong> ضمان وصولك لبياناتك وكلماتك المحفوظة ونقاطك عبر جميع أجهزتك.</span></li>
+        <li><span><strong>تقديم ميزات الذكاء الاصطناعي:</strong> توليد شروحات المفردات وتوضيح معناها بالسياق بدقة عالية.</span></li>
+        <li><span><strong>معالجة الاشتراكات:</strong> تفعيل وإدارة اشتراك العضوية المميزة وربطه بحسابك.</span></li>
+        <li><span><strong>التنبيهات والممارسة:</strong> إرسال تذكيرات محلية لمساعدتك في الحفاظ على سلسلة التعلم اليومية (Streaks) وتحديثات لوحة الصدارة.</span></li>
+        <li><span><strong>عرض الإعلانات:</strong> تمويل وتوفير الميزات المجانية في التطبيق عبر عرض الإعلانات المناسبة.</span></li>
+        <li><span><strong>تحسين الجودة والصيانة:</strong> تحليل الأعطال الفنية وأداء الشاشات وتطوير ميزات جديدة بناءً على تحليلات PostHog.</span></li>
+      </ul>
     </div>
 
-    <!-- Section 7 -->
+    <!-- Section 7: Notifications, Audio, Storage -->
     <div class="section">
       <div class="section-title">
         <div class="section-num">٧</div>
-        <h2>التغييرات على هذه السياسة</h2>
+        <h2>التنبيهات والميزات الصوتية والتخزين المحلي</h2>
       </div>
-      <p>قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر. إذا أجرينا تغييرات، سنُعلمك بذلك عن طريق تعديل التاريخ في أعلى السياسة.</p>
+
+      <div class="sub-section">
+        <div class="sub-title">أ. الإشعارات والتذكيرات المحلية</div>
+        <p>
+          يستخدم التطبيق نظام الإشعارات المحلي لجهازك (<span class="tech-badge">Expo Notifications</span>) لإرسال تذكيرات المذاكرة اليومية وتنبيهات المنافسة على لوحة الصدارة. تعمل هذه الإشعارات محلياً على جهازك دون الحاجة لمشاركة بياناتك مع سيرفرات إشعارات خارجية. يمكنك التحكم الكامل فيها أو إيقافها من إعدادات التطبيق أو إعدادات الهاتف.
+        </p>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-title">ب. الميزات الصوتية وقراءة النصوص</div>
+        <p>
+          تُستخدم ملفات صوتية جاهزة (منتجة مسبقاً لمحتوى الكتب فقط، وليست تسجيلات صوتية لك) بالإضافة إلى محرك تحويل النص إلى صوت المدمج بجهازك (<span class="tech-badge">Expo Speech</span>) لنطق الكلمات. التطبيق لا يقوم بنقل أو تسجيل صوتك أو ميكروفونك لأي سيرفرات خارجية.
+        </p>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-title">ج. التخزين المحلي والأمان على الجهاز</div>
+        <p>
+          نستخدم تقنيات التخزين المحلي الآمن على هاتفك (<span class="tech-badge">Expo SecureStore</span> و <span class="tech-badge">AsyncStorage</span>) للحفاظ على رموز الجلسة (Session Tokens)، التفضيلات الشخصية، قائمة التعديلات غير المزامنة، والكلمات المخزنة محلياً لضمان سرعة واستمرارية العمل دون اتصال بالإنترنت.
+        </p>
+      </div>
     </div>
 
-    <!-- Section 8 -->
+    <!-- Section 8: Your Rights & Account Deletion -->
     <div class="section">
       <div class="section-title">
         <div class="section-num">٨</div>
-        <h2>اتصل بنا</h2>
+        <h2>حقوقك والتحكم الكامل في بياناتك وحذف الحساب</h2>
       </div>
-      <p>إذا كان لديك أي أسئلة حول سياسة الخصوصية هذه، يُرجى التواصل معنا على:<strong>antrahere9@gmail.com</strong></p>
+
+      <div class="sub-section">
+        <div class="sub-title">أ. حذف الحساب والبيانات المباشر (من داخل التطبيق)</div>
+        <div class="highlight-card alert">
+          <p>
+            <strong>ميزة الحذف المباشر للحساب:</strong><br />
+            تتيح لك Antra إمكانية طلب حذف حسابك وكافة بياناتك الشخصية نهائياً ومباشرة من داخل التطبيق بالتوجّه إلى: <strong>الإعدادات &gt; حذف الحساب</strong>.
+          </p>
+          <p style="margin-bottom:0; font-size:14px; color:var(--text);">
+            يتم حذف بيانات حسابك من أنظمتنا الأساسية عند تأكيد طلب الحذف، مع مراعاة البيانات التي يجب الاحتفاظ بها لفترة محددة لأسباب قانونية أو محاسبية، أو البيانات الموجودة ضمن النسخ الاحتياطية التي تُحذف وفق دورة الاحتفاظ بها.
+          </p>
+        </div>
+        <p>
+          كما يمكنك طلب حذف حسابك وبياناتك عبر مراسلتنا بريدياً على: <strong>support@antra.uk</strong> أو <strong>antrahere9@gmail.com</strong>.
+        </p>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-title">ب. التحكم في التتبع والتخصيص الإعلاني</div>
+        <p>يمكنك إلغاء الاشتراك في الإعلانات المخصصة أو منع تتبع الإعلانات في أي وقت عبر إعدادات هاتفك المحمول:</p>
+        <ul class="platform-list">
+          <li><strong>iOS:</strong> انتقل إلى الإعدادات &gt; الخصوصية والأمن &gt; التتبع، وقم بتعطيل "السماح للتطبيقات بطلب التتبع".</li>
+          <li><strong>Android:</strong> انتقل إلى الإعدادات &gt; Google &gt; الإعلانات، وقم بتفعيل "إلغاء الاشتراك في تخصيص الإعلانات" أو حذف معرّف الإعلانات.</li>
+        </ul>
+      </div>
     </div>
 
-  </div><!-- /doc-body -->
+    <!-- Section 9: Data Retention Schedules -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">٩</div>
+        <h2>مدة الاحتفاظ بالبيانات</h2>
+      </div>
+      <p>نحتفظ ببياناتك فقط للفترة الضرورية لتحقيق الأغراض الموضحة في هذه السياسة وفق الضوابط التالية:</p>
+      <ul class="policy-list">
+        <li><span><strong>بيانات الحساب والتعلم:</strong> يتم حذف بيانات حسابك من أنظمتنا الأساسية عند تأكيد طلب الحذف، مع مراعاة البيانات التي يجب الاحتفاظ بها لفترة محددة لأسباب قانونية أو محاسبية، أو البيانات الموجودة ضمن النسخ الاحتياطية التي تُحذف وفق دورة الاحتفاظ بها.</span></li>
+        <li><span><strong>سجلات التحليلات (PostHog):</strong> تُحفظ بيانات التحليلات لفترة تصل إلى 12 شهراً لأغراض تحسين الأداء، ثم تُحذف أو تُجمّع بشكل غير قابل لربطها بهويتك.</span></li>
+        <li><span><strong>الشروحات المخزّنة في الكاش المشترك:</strong> غير مرتبطة بهويتك الشخصية، وتُحفظ كمرجع لغوي عام ليستفيد منه جميع المستخدمين.</span></li>
+        <li><span><strong>سجلات المعاملات والدفع:</strong> نحتفظ بسجلات المعاملات المالية والاشتراكات للمدة اللازمة للأغراض المحاسبية والقانونية.</span></li>
+      </ul>
+    </div>
+
+    <!-- Section 10: Data Security -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">١٠</div>
+        <h2>أمان البيانات والحماية</h2>
+      </div>
+      <p>
+        نحن نطبق إجراءات أمنية تقنية وتنظيمية لحماية بياناتك من الوصول غير المصرح به أو التعديل أو الإفصاح أو الإتلاف:
+      </p>
+      <ul class="policy-list">
+        <li><span>تشفير كافة البيانات المنقولة بين التطبيق والسيرفرات باستخدام بروتوكولات الشفرة الآمنة (<span class="tech-badge">HTTPS / TLS</span>).</span></li>
+        <li><span>تطبيق سياسات الأمان والحماية على مستوى الصفوف (<span class="tech-badge">Row Level Security - RLS</span>) في قواعد بيانات Supabase لمنع وصول أي مستخدم لبيانات مستخدم آخر.</span></li>
+        <li><span>تخزين رموز الجلسة والمفاتيح الحساسة في بيئة مشفرة ومحمية على هاتف المستخدم (<span class="tech-badge">SecureStore</span>).</span></li>
+        <li><span>الاحتفاظ بمفاتيح الوصول الخاصة بخدمات الذكاء الاصطناعي على سيرفراتنا فقط، ولا يتم تضمينها إطلاقاً داخل كود التطبيق نفسه.</span></li>
+      </ul>
+    </div>
+
+    <!-- Section 11: Children Privacy -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">١١</div>
+        <h2>خصوصية الأطفال</h2>
+      </div>
+      <p>
+        التطبيق موجه لعامة الجمهور والراغبين في تعلم اللغة الإنجليزية، ولا يستهدف الأطفال دون سن 13 عاماً بشكل خاص. نحن لا نجمع عن قصد أي معلومات شخصية قابلة للتعرف من الأطفال تحت سن 13 عاماً. إذا تبين لنا جمع معلومات عن طفل دون هذا السن، فسنقوم بحذفها فوراً.
+      </p>
+    </div>
+
+    <!-- Section 12: Policy Changes -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">١٢</div>
+        <h2>التغييرات على سياسة الخصوصية</h2>
+      </div>
+      <p>
+        قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر لمواكبة الميزات الجديدة أو التغييرات القانونية. عند إجراء أي تغييرات جوهرية، سنقوم بتحديث تاريخ "آخر تحديث" في أعلى هذا المستند وإشعارك داخل التطبيق عند اللزوم.
+      </p>
+    </div>
+
+    <!-- Section 13: Contact Us -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">١٣</div>
+        <h2>اتصل بنا</h2>
+      </div>
+      <p>إذا كانت لديك أي استفسارات أو أسئلة أو طلبات متعلقة بسياسة الخصوصية هذه أو بحماية بياناتك، يرجى التواصل معنا عبر الوسائل التالية:</p>
+      <ul class="policy-list">
+        <li><span><strong>البريد الإلكتروني للدعم الفني:</strong> support@antra.uk</span></li>
+        <li><span><strong>البريد الإلكتروني البديل:</strong> antrahere9@gmail.com</span></li>
+        <li><span><strong>حساب TikTok:</strong> @antra_eng</span></li>
+        <li><span><strong>حساب Instagram:</strong> @antra_eng</span></li>
+      </ul>
+    </div>
+
+  </div>
 
   <div class="doc-footer">
     © 2026 Antra. جميع الحقوق محفوظة.
   </div>
 
-</div><!-- /page-wrap -->
+</div>
 
 </body>
 </html>
